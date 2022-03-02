@@ -15,6 +15,9 @@ ENV CC=aarch64-linux-gnu-gcc-10 \
     LD=aarch64-linux-gnu-ld \
     FC=aarch64-linux-gnu-gfortran-10
 
+RUN sudo sed -i -E "s/deb (http.+)/deb \[arch=amd64\] \1/g" /etc/apt/sources.list && \
+    cat /etc/apt/sources.list
+
 RUN sudo dpkg --add-architecture arm64 \
     && sudo apt-get -qq update \
     && sudo apt-get install -y --no-install-recommends --no-install-suggests \
